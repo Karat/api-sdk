@@ -9,9 +9,9 @@ from .setup_logging import get_logger
 log = get_logger(__name__)
 
 envs = {
-    "production": {"url": "https://{}.karat.io/api/v1/graphql"},
-    "staging": {"url": "https://{}.cotrain.io/api/v1/graphql"},
-    "development": {"url": "http://{}.localtest.me:3000/api/v1/graphql"},
+    'production': {'url': 'https://{}.karat.io/api/v1/graphql'},
+    'staging': {'url': 'https://{}.cotrain.io/api/v1/graphql'},
+    'development': {'url': 'http://{}.localtest.me:3000/api/v1/graphql'},
 }
 
 QUERIES = {
@@ -37,7 +37,7 @@ class KaratClient:
     self.usable = False
 
     if environment not in envs:
-      raise UnknownEnvironmentError(f"Unknown environment: {environment}")
+      raise UnknownEnvironmentError(f'Unknown environment: {environment}')
     url = envs[environment]['url']
 
     # The API 
@@ -82,5 +82,5 @@ class KaratClient:
 
   def whoami(self):
     result = self.execute(gql('{ me { name }}'))
-    actor = result["me"]["name"]
+    actor = result['me']['name']
     return actor

@@ -49,8 +49,8 @@ class ExampleQuery(Query):
   # }
 
   query = gql("""
-    your query goes here!
-  """)
+    {me {name}}
+  """) # your query goes here!
 
   # Need custom pre-processing? This method is for you!
   # It needs to read from self.params and write to self.final_params
