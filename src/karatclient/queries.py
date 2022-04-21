@@ -4,6 +4,64 @@ from .operation import Operation
 class Query(Operation):
   pass
 
+class ExampleQuery(Query):
+  """ Examples of what can be overriden on an Operation
+
+      You can also override any methods that a given Operation shouldn't be
+      able to do, for instance if you have custom parameter setting you
+      can override set_params() to throw an exception
+  """
+
+  # Whether this is a GraphQL connection type and should allow the paging vars
+  connection_type = False
+
+  # Can be either a dict or a list
+  args = {
+    'fieldName1': [],
+    'fieldName2': ['subfield'],
+    'fieldName3': ['subfield'],
+    'fieldName3': ['subfield', 'subsubfield']
+  }
+  # Creates the following when fully populated:
+  # {
+  #   fieldName1: value,
+  #   subfield: {
+  #     fieldName2: value,
+  #     fieldName3: value,
+  #     subsubfield: {
+  #       fieldName3: value
+  #     }
+  #   }
+  # }
+
+  args = [
+    'fieldName1',
+    'fieldName2',
+    'fieldName3',
+    'fieldName3'
+  ]
+  # Creates the following when fully populated:
+  # {
+  #   fieldName1: value,
+  #   fieldName2: value,
+  #   fieldName3: value,
+  #   fieldName3: value
+  # }
+
+  query = gql("""
+    your query goes here!
+  """)
+
+  # Need custom pre-processing? This method is for you!
+  # It needs to read from self.params and write to self.final_params
+  def pre_process():
+    pass
+
+  # Need custom post-processing? This method is for you!
+  # It needs to read from self.raw_result and write to self.result
+  def pre_process():
+    pass
+
 class UserQuery(Query):
   connection_type = True
 

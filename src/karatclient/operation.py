@@ -4,8 +4,11 @@ class Operation:
   # Set up some defaults...
   args = {}
   mandatory_parameters = set()
+
+  # Is this a GraphQL connection type? Override in your subclass if so
   connection_type = False
 
+  # If this is a connection type, the following parameters are assumed to exist
   connection_type_extra_params = set([
     'first',
     'last',
@@ -19,6 +22,7 @@ class Operation:
 
   def __init__(self, karat_client):
     self.karat_client = karat_client
+
     if self.connection_type:
       for item in self.connection_type_extra_params:
         self.args[item] = []
@@ -37,6 +41,7 @@ class Operation:
     """ List the mandatory arguments, without which this Operation
         cannot be executed
     """
+
     return list(self.mandatory_parameters)
 
   def execute(self):
@@ -77,6 +82,7 @@ class Operation:
     """
 
     expected = self.mandatory_parameters.copy()
+
     for item in self.set_parameters:
       if item in expected:
         expected.remove(item)
