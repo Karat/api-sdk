@@ -12,6 +12,6 @@ $ pip install -r requirements.txt
 $ TOKEN=your-token-here ENVIRONMENT=[production/staging/development] SUBDOMAIN=your-subdomain-here python examples.py
 ```
 
-
 # TODO
-Add postprocessing to most queries and mutations
+- Add postprocessing to most queries and mutations
+- Add tests
