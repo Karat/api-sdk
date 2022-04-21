@@ -1,4 +1,4 @@
-from src.client import client
+from src.karatclient import KaratClient
 from pprint import pprint
 import os
 
@@ -8,7 +8,7 @@ if 'TOKEN' not in os.environ or 'SUBDOMAIN' not in os.environ:
 
 print('\n------ Instantiating a client\n')
 
-kc = client.KaratClient(
+kc = KaratClient(
   token=os.environ['TOKEN'],
   environment=os.environ.get('ENVIRONMENT'),
   subdomain=os.environ.get('SUBDOMAIN')
