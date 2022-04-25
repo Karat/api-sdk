@@ -3,7 +3,7 @@ from pprint import pprint
 import os
 
 if 'TOKEN' not in os.environ or 'SUBDOMAIN' not in os.environ:
-  print('No token found. Please run this script as `TOKEN=your-token-here ENVIRONMENT=[production/staging/development] SUBDOMAIN=your-subdomain-here python examples.py`')
+  print('No token found. Please run this script as `TOKEN=your-token-here ENVIRONMENT=[production/test/development] SUBDOMAIN=your-subdomain-here python examples.py`')
   exit()
 
 print('\n------ Instantiating a client\n')
@@ -53,11 +53,8 @@ print('\n------ fluent mutations\n')
 
 print('Sending an invite (This will fail due to missing arguments!):')
 
-invite_mutation = kc.mutation('invite')
-invite_mutation.set_param('email', 'user@example.com')
-
 try:
-  result2 = invite_mutation.execute()
+  result2 = kc.mutation('invite').set_param('email', 'user@example.com').execute()
 except Exception as ex:
   print(f'Exception received! {ex}')
 
@@ -80,4 +77,4 @@ disposition_mutation.add_outcome('OFFER_ACCEPTED', '17') # can accept either lis
 try:
   disposition_mutation.execute()
 except Exception as ex:
-  print(f'Exception received (likely invalid permissions): {ex}')
+  print(f'Exception received (likely invalid permissions against the provided candidacy IDs - you can replace these with your own): {ex}')

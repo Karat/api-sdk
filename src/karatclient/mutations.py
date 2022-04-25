@@ -1,6 +1,6 @@
 from gql import gql
 from .operation import Operation
-from .exceptions import InvalidOperationError
+from .exceptions import InvalidOperationError, MissingMandatoryParameterError
 
 class InviteMutation(Operation):
   """ A simple mutation that accepts standard parameters and creates an invitation
@@ -123,3 +123,12 @@ class DispositionMutation(Operation):
 
   def post_process(self):
     self.result = self.raw_result['bulkUpdateCandidacyStatus']
+
+  def validate_params(self):
+    """ Ensures all parameters for self.mandatory_parameters are set
+    """
+
+    if 'updates' not in self.params:
+      raise MissingMandatoryParameterError(
+        f'Missing mandatory parameters: no disposition parameters added'
+      )

@@ -10,7 +10,7 @@ log = get_logger(__name__)
 
 envs = {
     'production': {'url': 'https://{}.karat.io/api/v1/graphql'},
-    'staging': {'url': 'https://{}.cotrain.io/api/v1/graphql'},
+    'test': {'url': 'https://{}.cotrain.io/api/v1/graphql'},
     'development': {'url': 'http://{}.localtest.me:3000/api/v1/graphql'},
 }
 
