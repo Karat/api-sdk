@@ -33,3 +33,5 @@ There are several examples provided as part of the `examples.py` script, which c
 # TODO
 - Add postprocessing to most queries and mutations
 - Add tests
+
+Copyright © 2022 Karat Inc.
